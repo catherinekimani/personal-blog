@@ -31,3 +31,13 @@ class User(UserMixin, db.Model):
     
     def __repr__(self):
         return f'User {self.username}'
+    
+# quotes class
+class Quote:
+    '''
+    quotes class to define quotes objects
+    '''
+    def __init__(self,author,quote,permalink):
+        self.author = author
+        self.quote = quote
+        self.permalink = permalink
