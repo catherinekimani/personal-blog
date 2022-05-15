@@ -1,0 +1,2 @@
+Hello {{user.username}}
+Welcome To MyBlog!
