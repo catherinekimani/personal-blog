@@ -12,6 +12,10 @@
             {% else %}
             <p> {{user.username| capitalize}} has no bio </p>
             {% endif %}
+            <!-- edit profile -->
+            {% if user == current_user %}
+            <a href="{{url_for('main.update_profile',name=user.username)}}">Edit profile</a>
+            {% endif %}
         </div>
         <!-- profile -->
         <div class="col-md-4">
