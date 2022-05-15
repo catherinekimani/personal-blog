@@ -6,17 +6,15 @@ body{
 }
 
 /* style nabvar */
-nav{
+.navbar{
     background-color: black;
     height: 10vh;
 }
 
-nav a {
+.navbar,a {
     color: white;
-    margin-top: 1%;
     font-weight: bold;
-    font-size: 30px;
-}
+} 
 
 a:hover{
     color: black;
@@ -24,9 +22,9 @@ a:hover{
     border-radius: 10px;
 }
 
-span{
+.my{
     color: rgb(222, 177, 14);
-    font-size: 35px;
+    font-size: 30px;
 }
 
 img{

@@ -1,15 +1,28 @@
 <!-- As a link -->
-<nav class="navbar">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#"><span> My</span>Blog </a>
-        <ul class="nav navbar-nav navbar-right">
-            {% if current_user.is_authenticated %}
-            <li style="color:white;padding:15px;">{{current_user.username}}</li>
-            <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
-            {% else %}
-            <li><a href="{{url_for('auth.register')}}">Sign in</a></li>
-            {%endif%}
-        </ul>
+<nav class="navbar  navbar-default navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><span class="my">My</span>Blog</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_authenticated %}
+
+                <li style="color:white;padding:15px; font-size: 20px; color: rgb(255, 162, 0); font-weight: bold;">
+                    {{current_user.username}}</li>
+                <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
+                {% else %}
+                <li><a href="{{url_for('auth.register')}}"><span class="glyphicon glyphicon-user">SignUp</span></a></li>
+                <li><a href="{{url_for('auth.login')}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                {%endif%}
+            </ul>
+        </div>
     </div>
-    
 </nav>
