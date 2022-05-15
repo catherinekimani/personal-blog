@@ -2,7 +2,8 @@ from flask import render_template,request,url_for,redirect,abort
 from . import main
 from ..models import User
 from .forms import UpdateProfile
-from .. import db
+from .. import db,photos
+from flask_login import login_required
 
 @main.route('/')
 def index():
@@ -41,3 +42,15 @@ def update_profile(name):
         return redirect(url_for('.profile', name = user.username))
     
     return render_template('profile/update.html',form = form)
+
+# profile pic update
+@main.route('/user/<name>/update/pic',methods= ['POST'])
+@login_required
+def update_pic(name):
+    user = User.query.filter_by(username = name).first()
+    if 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        path = f'photos/{filename}'
+        user.profile = path
+        db.session.commit()
+    return redirect(url_for('main.profile',name=name))
