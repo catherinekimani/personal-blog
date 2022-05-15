@@ -1,18 +1,19 @@
 from flask import render_template,request,url_for,redirect,abort
 from . import main
-from ..models import User
+from ..models import User,Quote
 from .forms import UpdateProfile
 from .. import db,photos
 from flask_login import login_required
+from ..requests import get_random_quotes
 
 @main.route('/')
 def index():
-    
+    quote = get_random_quotes()
     '''
     View root page function that returns the index page and its data
     '''
     
-    return render_template('index.html')
+    return render_template('index.html',quote = quote)
 
 @main.route('/user/<name>')
 def profile(name):
