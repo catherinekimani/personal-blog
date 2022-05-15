@@ -1,0 +1,37 @@
+/* css ruleset */
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* style nabvar */
+nav{
+    background-color: black;
+    height: 10vh;
+}
+
+nav a {
+    color: white;
+    margin-top: 1%;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+a:hover{
+    color: black;
+    background-color: rgb(238, 246, 246);
+    border-radius: 10px;
+}
+
+span{
+    color: rgb(222, 177, 14);
+    font-size: 35px;
+}
+
+img{
+    background-size: cover;
+    height: 85vh;
+    margin-top: -2%;
+    width: 100%;
+}
