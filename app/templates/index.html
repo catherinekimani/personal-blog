@@ -6,5 +6,11 @@
 {% endblock %}
 
 {% block content %}
-<img src="{{url_for('static',filename='images/blog.jpg')}}" alt="image">
+<div class="container-fluid">
+<div class="quote">
+    <img src="{{url_for('static',filename='images/left-quote.png')}}" alt="hey">
+        <p>{{quote.quote}}</p>
+        <blockquote style="color: white;">{{quote.author| capitalize}}</blockquote>
+    </div>
+    </div>
 {% endblock %}
