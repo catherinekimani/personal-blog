@@ -2,6 +2,7 @@ from . import db
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 from . import login_manager
+from datetime import datetime
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -41,3 +42,34 @@ class Quote:
         self.author = author
         self.quote = quote
         self.permalink = permalink
+        
+class Blog(db.Model):
+    _tablename_='blogs'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    title = db.Column(db.String(55))
+    category = db.Column(db.String(255))
+    description= db.Column(db.String(255))
+    post_by= db.Column(db.String(255))
+    date_posted = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def save_blog(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def remove_blog(self):
+        db.session.delete(self)
+        db.session.commit()    
+
+    @classmethod
+    def get_blogs(cls,id):
+            blogs =Blog.query.filter_by(blog_id=id).all()
+            return blogs  
+
+    @classmethod
+    def get_current_blog(cls,user_id):
+            blogs =Blog.query.filter_by(user_id=user_id)
+            return blogs      
+
+    def repr(self):
+        return f'Blog {self.description}'
