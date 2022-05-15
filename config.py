@@ -4,6 +4,7 @@ class Config:
     '''
     General configuration parent class
     '''
+    UPLOADED_PHOTOS_DEST ='app/static/photos'
     SECRET_KEY='katewambui'
     
 class ProdConfig(Config):
@@ -25,7 +26,7 @@ class DevConfig(Config):
     Args:
         Config: The parent configuration class with general configuration settings
     '''
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:wambu@localhost/blogs'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:wambui@localhost/blogs'
     
     DEBUG  = True
     
