@@ -9,15 +9,14 @@ body{
 
 /* style nabvar */
 
-.navbar,a {
+.navbar {
     color: white;
     font-weight: bold;
 } 
 
 a:hover{
-    color: black;
+    color: rgb(250, 51, 51);
     background-color: rgb(238, 246, 246);
-    border-radius: 10px;
 }
 
 .my{
@@ -69,4 +68,55 @@ blockquote{
 .style{
     color: rgb(243, 251, 251);
     font-size: 1.6rem;
+}
+
+.form{
+    background-color: black;
+    border-radius: 5px;
+    color: aqua;
+    height: 55vh;
+    font-size: 20px;
+    font-family: 'Anek Gujarati',
+    sans-serif;
+    font-family: 'Roboto Condensed',
+    sans-serif;
+}
+
+/* profile styling */
+.img-thumbnail{
+    width: 70%;
+}
+
+.profile{
+    background-color: black;
+    color: aqua;
+    height: 70vh;
+    font-size: 20px;
+    font-family: 'Anek Gujarati',
+    sans-serif;
+    font-family: 'Roboto Condensed',
+    sans-serif;
+}
+
+.btn1{
+    background-color: cyan;
+    margin: 2%;
+}
+
+.btn2 {
+    background-color: black;
+    margin-left: 30%;
+    /* margin: 2%; */
+    color: rgb(rgb(250, 245, 245), green, blue);
+}
+
+/* comments styling  */
+ol{
+    background-color: aliceblue;
+    height: 53vh;
+    font-size: 20px;
+    font-family: 'Anek Gujarati',
+    sans-serif;
+    font-family: 'Roboto Condensed',
+    sans-serif;
 }
