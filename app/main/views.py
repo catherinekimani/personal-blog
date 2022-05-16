@@ -1,19 +1,24 @@
 from flask import render_template,request,url_for,redirect,abort
 from . import main
-from ..models import User,Quote
+from ..models import User,Blog
 from .forms import UpdateProfile
 from .. import db,photos
-from flask_login import login_required
+from flask_login import login_required,current_user
 from ..requests import get_random_quotes
+from sqlalchemy import desc
 
 @main.route('/')
 def index():
     quote = get_random_quotes()
+    blogs = Blog.query.all()
+    user = User.query.filter_by(id=current_user.get_id()).first()
+    current_post = Blog.query.order_by(desc(Blog.id)).all()
+    
     '''
     View root page function that returns the index page and its data
     '''
     
-    return render_template('index.html',quote = quote)
+    return render_template('index.html',quote = quote, blogs = blogs, user = user, current_post=current_post)
 
 @main.route('/user/<name>')
 def profile(name):

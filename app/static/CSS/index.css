@@ -45,3 +45,28 @@ a:hover{
 img{
     width: 10%;
 }
+
+/* blogs */
+.blogs{
+    text-align: center;
+    font-family: 'Anek Gujarati',
+    sans-serif;
+    font-family: 'Roboto Condensed',
+    sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: white
+}
+
+.thumbnail{
+    background-color: black;
+}
+
+blockquote{
+    color: aqua;
+}
+
+.style{
+    color: rgb(243, 251, 251);
+    font-size: 1.6rem;
+}

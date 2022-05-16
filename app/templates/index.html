@@ -12,5 +12,25 @@
         <p>{{quote.quote}}</p>
         <blockquote style="color: white;">{{quote.author| capitalize}}</blockquote>
     </div>
+    <div class="container">
+        <div class="row">
+            <marquee behavior="" direction="right"><h1 class="blogs"> <span class="my">Latest</span> Blogs </h1></marquee>
+            {% for blog in current_post %}
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <div class="style">
+                        <h4>{{blog.title}}</h4>
+                        <h5 style="color: rgb(238, 184, 5);"> Category:{{blog.category}}</h5>
+                        <p> {{blog.description}}</p>
+                        </div>
+                        <blockquote><p> Post By {{blog.post_by}}</p></blockquote>
+                        <mark> Date: {{blog.date_posted}}</mark>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
     </div>
 {% endblock %}
