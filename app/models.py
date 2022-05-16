@@ -18,7 +18,7 @@ class User(UserMixin, db.Model):
     profile = db.Column(db.String())
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     blogs = db.relationship('Blog',backref = 'blog',lazy = 'dynamic')
-    comments = db.relationship('Blog',backref = 'blog',lazy = 'dynamic')
+    comments = db.relationship('Comments',backref = 'blog',lazy = 'dynamic')
     
     @property
     def password(self):
@@ -54,7 +54,7 @@ class Blog(db.Model):
     description= db.Column(db.String(400))
     post_by= db.Column(db.String(255))
     date_posted = db.Column(db.DateTime, default=datetime.utcnow)
-
+    
     def save_blog(self):
         db.session.add(self)
         db.session.commit()
@@ -79,19 +79,23 @@ class Blog(db.Model):
 class Comments(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     text = db.Column(db.Text, nullable=False)
-    blog_id = db.Column(db.Integer,db.ForeignKey('blogs.id'))
+    date_posted = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'))
     
     def save_comment(self):
         db.session.add(self)
         db.session.commit()
-    
+
+    def remove_comment(self):
+        db.session.delete(self)
+        db.session.commit()    
+        
     @classmethod
     def get_comments(cls,blog_id):
-        comments = Comments.query.filter_by(blog_id=blog_id).all()
+            comments =Comments.query.filter_by(blog_id=blog_id).all()
+            return comments       
         
-        return comments
-    
     def __repr__(self):
         return f'User {self.text}'
