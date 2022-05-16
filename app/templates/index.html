@@ -25,7 +25,10 @@
                         <p> {{blog.description}}</p>
                         </div>
                         <blockquote><p> Post By {{blog.post_by}}</p></blockquote>
-                        <mark> Date: {{blog.date_posted}}</mark>
+                        <mark> Date: {{blog.date_posted}}</mark> <br>
+                        <a href="{{url_for('main.new_comments',blog_id=blog.id)}}"><button class="btn1">Comment</button> </a>
+                        <a href=""><button class="btn2">Delete</button> </a>
+
                     </div>
                 </div>
             </div>
@@ -33,4 +36,4 @@
         </div>
     </div>
     </div>
-{% endblock %}
+{% endblock %}%
