@@ -1,7 +1,7 @@
 from flask import render_template,request,url_for,redirect,abort
 from . import main
-from ..models import User,Blog
-from .forms import UpdateProfile
+from ..models import User,Blog,Comments
+from .forms import UpdateProfile,BlogForm,CommentForm
 from .. import db,photos
 from flask_login import login_required,current_user
 from ..requests import get_random_quotes
@@ -19,6 +19,25 @@ def index():
     '''
     
     return render_template('index.html',quote = quote, blogs = blogs, user = user, current_post=current_post)
+
+# comments
+@main.route('/comments/<int:blog_id>', methods=['GET','POST'])
+@login_required
+def new_comments(blog_id):
+    comments = Comments.get_comments(blog_id)
+    blogs = Blog.query.get(blog_id)
+    post_by = Blog.user_id
+    user = User.query.filter_by(id=post_by).first()
+    
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = form.comment.data      
+        new_comment = Comments(text=comment, blog_id=blog_id, user_id=current_user.get_id())
+        new_comment.save_comment()
+        return redirect(url_for('main.index',blog_id = blog_id))
+
+    return render_template('comments.html',Commentsform=form, comments=comments, blogs = blogs, user=user)
+
 
 @main.route('/user/<name>')
 def profile(name):
