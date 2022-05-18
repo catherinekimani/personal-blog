@@ -33,7 +33,7 @@
                         <p> {{blog.description}}</p>
                         </div>
                         <blockquote><p> Post By {{blog.post_by}}</p></blockquote>
-                        <a  class="btn btn-primary" href=""> EditBlog</a>
+                        <a  class="btn btn-primary" href="{{ url_for('main.edit_blog', blog_id = blog.id)}}"> EditBlog</a>
                         <a  class="btn btn-success" href="{{url_for('main.new_comments',blog_id=blog.id)}}">Comment</a>
                         <a class =" btn btn-danger" href="{{url_for('main.delete',id = blog.id)}}">Delete</a>
                         <!-- <mark> Date: {{blog.date_posted}}</mark> <br> <br> -->

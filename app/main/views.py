@@ -83,6 +83,25 @@ def subscribe():
         db.session.commit()
         return redirect(url_for('main.index'))
 
+# edit blog
+@main.route('/blog/<blog_id>/edit',methods=['GET', 'POST'])
+@login_required
+def edit_blog(blog_id):
+    blog=Blog.query.filter_by(id=blog_id).first()
+    if blog.post_by.id !=current_user.id:
+        abort(403)
+
+    form=BlogForm()
+    if form.validate_on_submit():
+        blog.title=form.title.data
+        blog.description=form.description.data
+        db.session.commit()
+        return redirect(url_for('.blog',blog_id=blog.id) )
+    elif request.method=='GET':
+        form.title.data=blog.title
+        form.description.data=blog.description
+        
+
 @main.route('/user/<name>')
 def profile(name):
     user = User.query.filter_by(username = name).first()
