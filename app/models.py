@@ -79,7 +79,7 @@ class Blog(db.Model):
 class Comments(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.Text, nullable=False)
+    text = db.Column(db.String())
     date_posted = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'))
