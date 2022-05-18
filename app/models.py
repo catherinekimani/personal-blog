@@ -18,7 +18,6 @@ class User(UserMixin, db.Model):
     profile = db.Column(db.String())
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     blogs = db.relationship('Blog',backref = 'blog',lazy = 'dynamic')
-    comments = db.relationship('Comments',backref = 'blog',lazy = 'dynamic')
     
     @property
     def password(self):
@@ -51,9 +50,10 @@ class Blog(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     title = db.Column(db.String(55))
     category = db.Column(db.String(255))
-    description= db.Column(db.String(400))
+    description= db.Column(db.String(3000))
     post_by= db.Column(db.String(255))
     date_posted = db.Column(db.DateTime, default=datetime.utcnow)
+    comments = db.relationship('Comments',backref = 'comments',lazy = 'dynamic')
     
     def save_blog(self):
         db.session.add(self)
@@ -99,3 +99,22 @@ class Comments(db.Model):
         
     def __repr__(self):
         return f'User {self.text}'
+
+
+class Subscriber(db.Model):
+        _tablename_ = 'subscribers'
+        id = db.Column(db.Integer, primary_key=True)
+        email = db.Column(db.String(255), unique=True, index=True)
+        date_posted = db.Column(db.DateTime, default=datetime.utcnow)
+
+        def save_subscriber(self):
+            db.session.add(self)
+            db.session.commit()
+
+        @classmethod
+        def get_subscribers(cls):
+            subscribers = Subscriber.query.all()
+            return subscribers
+
+        def _repr_(self):
+            return f'Subscriber {self.email}'
