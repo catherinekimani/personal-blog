@@ -88,7 +88,7 @@ def subscribe():
 @login_required
 def edit_blog(blog_id):
     blog=Blog.query.filter_by(id=blog_id).first()
-    if blog.post_by.id !=current_user.id:
+    if blog.id !=current_user.id:
         abort(403)
 
     form=BlogForm()
