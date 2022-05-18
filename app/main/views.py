@@ -1,6 +1,7 @@
+from curses import flash
 from flask import render_template,request,url_for,redirect,abort
 from . import main
-from ..models import User,Blog,Comments
+from ..models import User,Blog,Comments,Subscriber
 from .forms import UpdateProfile,BlogForm,CommentForm
 from .. import db,photos
 from flask_login import login_required,current_user
@@ -25,7 +26,7 @@ def index():
 @login_required
 def new_comments(blog_id):
     comments = Comments.get_comments(blog_id)
-    blogs = Blog.query.get(blog_id)
+    blog = Blog.query.get(blog_id)
     post_by = Blog.user_id
     user = User.query.filter_by(id=post_by).first()
     
@@ -36,7 +37,7 @@ def new_comments(blog_id):
         new_comment.save_comment()
         return redirect(url_for('main.index',blog_id = blog_id))
 
-    return render_template('comments.html',Commentsform=form, comments=comments, blogs = blogs, user=user)
+    return render_template('comments.html',Commentsform=form, comments=comments, blog = blog, user=user)
 
 # new blog
 @main.route('/new_blog', methods=['POST','GET'])
@@ -47,12 +48,40 @@ def new_blog():
         title = form.title.data
         description = form.description.data
         category = form.category.data
+        post_by = form.post_by.data
         user_id = current_user
-        new_blog =Blog(description=description,user_id=current_user._get_current_object().id,category=category,title=title)
+        new_blog =Blog(description=description,user_id=current_user._get_current_object().id,category=category,title=title,post_by=post_by)
         new_blog.save_blog()
         return redirect(url_for('main.index'))
     return render_template('new_blog.html', form = form)
 
+# delete blog
+@main.route('/delete_blog/<int:id>',methods = ['GET','POST'])
+@login_required
+def delete(id):
+    blog= Blog.query.get(id)
+    blog.remove_blog()
+    return redirect(url_for('main.index'))
+
+# delete comment
+@main.route('/delete_comment/<int:id>',methods = ['GET','POST'] )
+@login_required
+def delete_comment(id):
+    comments = Comments.query.filter_by(id=id).first()
+    comments.remove_comment()
+    return redirect(url_for('main.index'))
+
+# subscription
+@main.route('/subscribe', methods=['GET', 'POST'])
+def subscribe():
+        """
+        subscribe function that subscribes the user to the post
+        """
+        email = request.args.get('email')
+        new_subscriber = Subscriber(email=email)
+        db.session.add(new_subscriber)
+        db.session.commit()
+        return redirect(url_for('main.index'))
 
 @main.route('/user/<name>')
 def profile(name):
