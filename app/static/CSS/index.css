@@ -67,14 +67,14 @@ blockquote{
 
 .style{
     color: rgb(243, 251, 251);
-    font-size: 1.6rem;
+    font-size: 1.4rem;
 }
 
 .form{
     background-color: black;
     border-radius: 5px;
     color: aqua;
-    height: 55vh;
+    height: 70vh;
     font-size: 20px;
     font-family: 'Anek Gujarati',
     sans-serif;
@@ -90,7 +90,7 @@ blockquote{
 .profile{
     background-color: black;
     color: aqua;
-    height: 70vh;
+    height: 80vh;
     font-size: 20px;
     font-family: 'Anek Gujarati',
     sans-serif;
@@ -98,16 +98,11 @@ blockquote{
     sans-serif;
 }
 
-.btn1{
-    background-color: cyan;
-    margin: 2%;
-}
 
-.btn2 {
-    background-color: black;
-    margin-left: 30%;
-    /* margin: 2%; */
-    color: rgb(rgb(250, 245, 245), green, blue);
+
+/* btn */
+.btn{
+    margin-left: 5%;
 }
 
 /* comments styling  */

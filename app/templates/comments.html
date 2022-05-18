@@ -11,6 +11,8 @@
                 {% if comments %} {% for blogs in comments %}
                 <li>
                     {{blogs.text}}
+                    <br>
+                    <a class="btn btn-danger" href="{{url_for('main.delete_comment',id =blog.id)}}"> Delete </a>
                 </li>
                 {% endfor %}
                 {% endif %}

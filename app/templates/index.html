@@ -6,6 +6,14 @@
 {% endblock %}
 
 {% block content %}
+{% if current_user.is_authenticated %}
+<form action="{{ url_for('main.subscribe')}}" >
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+        placeholder="Your email address"><br>
+    <button type="submit" class="btn btn-primary">Subscribe</button>
+    <div>
+</form>
+{% endif %}
 <div class="container-fluid">
 <div class="quote">
     <img src="{{url_for('static',filename='images/left-quote.png')}}" alt="hey">
@@ -25,10 +33,10 @@
                         <p> {{blog.description}}</p>
                         </div>
                         <blockquote><p> Post By {{blog.post_by}}</p></blockquote>
-                        <mark> Date: {{blog.date_posted}}</mark> <br>
-                        <a href="{{url_for('main.new_comments',blog_id=blog.id)}}"><button class="btn1">Comment</button> </a>
-                        <a href=""><button class="btn2">Delete</button> </a>
-
+                        <a  class="btn btn-primary" href=""> EditBlog</a>
+                        <a  class="btn btn-success" href="{{url_for('main.new_comments',blog_id=blog.id)}}">Comment</a>
+                        <a class =" btn btn-danger" href="{{url_for('main.delete',id = blog.id)}}">Delete</a>
+                        <!-- <mark> Date: {{blog.date_posted}}</mark> <br> <br> -->
                     </div>
                 </div>
             </div>
